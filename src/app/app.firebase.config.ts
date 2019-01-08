@@ -1,8 +1,8 @@
 export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyCAErHxVBMMMFiMeDxN4ovLq7NNZdkdUsE",
-    authDomain: "entrepotpatate.firebaseapp.com",
-    databaseURL: "https://entrepotpatate.firebaseio.com",
-    projectId: "entrepotpatate",
-    storageBucket: "entrepotpatate.appspot.com",
-    messagingSenderId: "1088569560728"
+    apiKey: "AIzaSyB8cYMxRnseuDb6Vxq06wAro31CgAXs4Xw",
+    authDomain: "dev-cpa.firebaseapp.com",
+    databaseURL: "https://dev-cpa.firebaseio.com",
+    projectId: "dev-cpa",
+    storageBucket: "dev-cpa.appspot.com",
+    messagingSenderId: "349572713132"
 };

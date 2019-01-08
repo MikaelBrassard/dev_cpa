@@ -179,11 +179,11 @@ var map = {
 		7
 	],
 	"../pages/fans/fans.module": [
-		514,
+		513,
 		6
 	],
 	"../pages/login/login.module": [
-		513,
+		514,
 		5
 	],
 	"../pages/password/password.module": [
@@ -191,15 +191,15 @@ var map = {
 		4
 	],
 	"../pages/register/register.module": [
-		518,
+		516,
 		3
 	],
 	"../pages/statistiques/statistiques.module": [
-		516,
+		517,
 		0
 	],
 	"../pages/tabs/tabs.module": [
-		517,
+		518,
 		2
 	],
 	"../pages/temperature/temperature.module": [
@@ -584,12 +584,12 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/alert/alert.module#AlertPageModule', name: 'AlertPage', segment: 'alert', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/description-capteur/description-capteur.module#DescriptionCapteurPageModule', name: 'DescriptionPage', segment: 'description-capteur', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/fans/fans.module#FansPageModule', name: 'FansPage', segment: 'fans', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/password/password.module#PasswordModule', name: 'Password', segment: 'password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistiques/statistiques.module#StatistiquesPageModule', name: 'StatistiquesPage', segment: 'statistiques', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/temperature/temperature.module#TemperaturePageModule', name: 'TemperaturePage', segment: 'temperature', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -729,12 +729,12 @@ var AuthRequestProvider = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FIREBASE_CONFIG; });
 var FIREBASE_CONFIG = {
-    apiKey: "AIzaSyCAErHxVBMMMFiMeDxN4ovLq7NNZdkdUsE",
-    authDomain: "entrepotpatate.firebaseapp.com",
-    databaseURL: "https://entrepotpatate.firebaseio.com",
-    projectId: "entrepotpatate",
-    storageBucket: "entrepotpatate.appspot.com",
-    messagingSenderId: "1088569560728"
+    apiKey: "AIzaSyB8cYMxRnseuDb6Vxq06wAro31CgAXs4Xw",
+    authDomain: "dev-cpa.firebaseapp.com",
+    databaseURL: "https://dev-cpa.firebaseio.com",
+    projectId: "dev-cpa",
+    storageBucket: "dev-cpa.appspot.com",
+    messagingSenderId: "349572713132"
 };
 //# sourceMappingURL=app.firebase.config.js.map
 
