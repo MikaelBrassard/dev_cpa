@@ -1,0 +1,62 @@
+<ion-header>
+
+	<ion-navbar color="primary">
+		<ion-title>
+			Sondes de temperature
+		</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+	<ion-item>
+		<ion-label>Entrepot</ion-label>
+		<ion-select [(ngModel)]="selectionEntrepot" (ionChange)="onSelectEntrepotChange($event)">
+		  <ion-option value="Peribonka">Peribonka</ion-option>
+		  <ion-option value="StMrg">St-Margerite</ion-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>	
+		<ion-label>Section</ion-label>
+			<ion-select [(ngModel)]="selectionSection" (ionChange)="onSelectSectionChange($event)">
+				<div *ngIf="selectionEntrepot == 'Peribonka'">
+					<ion-option value="ABCD">Section ABCD</ion-option>
+					<ion-option value="EFG">Section EFG</ion-option>
+					<ion-option value="AutreP">Autre</ion-option>
+				</div>
+				<div *ngIf="selectionEntrepot == 'StMrg'">
+					<ion-option value="Pompe">Section Pompe</ion-option>
+					<ion-option value="Village">Section Village</ion-option>
+					<ion-option value="AutreSTM">Autre</ion-option>
+				</div>
+			</ion-select>	
+  	</ion-item>
+	<ion-list>
+			<ion-item-sliding *ngFor="let capteur of Capteurs | async; let i = index;">
+					<ion-item>
+						<div *ngIf="capteur.Temperature >= '65000';else else_content">
+							<ion-icon padding-top name="thermometer"></ion-icon>
+							<button ion-button clear padding-top (click)="onClickItemList(capteur.Description, i+1)">Temperature sonde {{capteur.DescriptionCourte}} :
+								{{capteur.Temperature-65536 | json}} °C</button>
+						</div>
+						<ng-template #else_content>
+							<ion-icon padding-top name="thermometer"></ion-icon>
+							<button ion-button clear padding-top (click)="onClickItemList(capteur.Description, i+1)">Temperature sonde {{capteur.DescriptionCourte}} :
+								{{capteur.Temperature | json}} °C</button>
+						</ng-template>
+					</ion-item>
+		
+					<ion-item-options>
+						<button ion-button color="secondary" (click)="descriptionClicked(i+1)">
+							<ion-icon name="menu"></ion-icon>
+							Description
+						</button>
+						<button ion-button [disabled]="!isenabled" color="secondary" (click)="statsClicked(i+1)">
+							<ion-icon name="analytics"></ion-icon>
+							Statistiques
+						</button>
+					</ion-item-options>
+		
+				</ion-item-sliding>
+	</ion-list>
+</ion-content>

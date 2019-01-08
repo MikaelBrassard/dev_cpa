@@ -1,0 +1,29 @@
+<ion-header>
+ 
+  <ion-navbar color="primary">
+    <ion-title>Graphique capteur {{ indexFromTabs }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+    <section class="chart-wrapper">
+      <canvas #barChart></canvas>
+    </section>
+  </div>
+  
+  <div>
+    <section class="chart-wrapper">
+      <canvas #pieChart></canvas>
+    </section>  
+  </div>
+  
+  <div>
+    <section class="chart-wrapper">
+      <canvas #lineChart></canvas>
+    </section>  
+  </div>
+
+</ion-content>
