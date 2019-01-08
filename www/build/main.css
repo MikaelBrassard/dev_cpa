@@ -25948,9 +25948,8 @@ page-register ion-footer .footer {
 }
 
 page-statistiques .chart-wrapper {
-  width: 75%;
+  width: 100%;
   display: inline-block;
-  margin: 1em 2em;
 }
 
 page-statistiques canvas {

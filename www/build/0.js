@@ -22117,7 +22117,7 @@ var StatistiquesPage = /** @class */ (function () {
                 maintainAspectRatio: false,
                 layout: {
                     padding: {
-                        left: 50,
+                        left: 0,
                         right: 0,
                         top: 0,
                         bottom: 0
@@ -22255,9 +22255,10 @@ var StatistiquesPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-statistiques',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/statistiques/statistiques.html"*/'<ion-header>\n \n  <ion-navbar color="primary">\n    <ion-title>Graphique capteur {{ indexFromTabs }}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div>\n    <section class="chart-wrapper">\n      <canvas #barChart></canvas>\n    </section>\n  </div>\n  \n  <div>\n    <section class="chart-wrapper">\n      <canvas #pieChart></canvas>\n    </section>  \n  </div>\n  \n  <div>\n    <section class="chart-wrapper">\n      <canvas #lineChart></canvas>\n    </section>  \n  </div>\n\n</ion-content>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/statistiques/statistiques.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */]) === "function" && _c || Object])
     ], StatistiquesPage);
     return StatistiquesPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=statistiques.js.map
