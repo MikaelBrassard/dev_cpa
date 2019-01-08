@@ -191,19 +191,19 @@ var map = {
 		4
 	],
 	"../pages/register/register.module": [
-		516,
+		519,
 		3
 	],
 	"../pages/statistiques/statistiques.module": [
-		517,
+		516,
 		0
 	],
 	"../pages/tabs/tabs.module": [
-		518,
+		517,
 		2
 	],
 	"../pages/temperature/temperature.module": [
-		519,
+		518,
 		1
 	]
 };
@@ -587,10 +587,10 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/fans/fans.module#FansPageModule', name: 'FansPage', segment: 'fans', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/password/password.module#PasswordModule', name: 'Password', segment: 'password', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistiques/statistiques.module#StatistiquesPageModule', name: 'StatistiquesPage', segment: 'statistiques', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/temperature/temperature.module#TemperaturePageModule', name: 'TemperaturePage', segment: 'temperature', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/temperature/temperature.module#TemperaturePageModule', name: 'TemperaturePage', segment: 'temperature', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_5_angularfire2__["a" /* AngularFireModule */].initializeApp(__WEBPACK_IMPORTED_MODULE_12__app_firebase_config__["a" /* FIREBASE_CONFIG */]),
