@@ -10,24 +10,24 @@
 
 <ion-content padding>
 	<ion-item>
-		<ion-label>Entrepot</ion-label>
-		<ion-select [(ngModel)]="selectionEntrepot" (ionChange)="onSelectEntrepotChange($event)">
-		  <ion-option value="Peribonka">Peribonka</ion-option>
-		  <ion-option value="StMrg">St-Margerite</ion-option>
+		<ion-label>Silo</ion-label>
+		<ion-select [(ngModel)]="selectionSilo" (ionChange)="onSelectSiloChange($event)">
+		  <ion-option value="Deshumidification">Deshumidification</ion-option>
+		  <ion-option value="Ventilation">Ventilation</ion-option>
 		</ion-select>
 	</ion-item>
 	<ion-item>	
-		<ion-label>Section</ion-label>
-			<ion-select [(ngModel)]="selectionSection" (ionChange)="onSelectSectionChange($event)">
-				<div *ngIf="selectionEntrepot == 'Peribonka'">
-					<ion-option value="ABCD">Section ABCD</ion-option>
-					<ion-option value="EFG">Section EFG</ion-option>
-					<ion-option value="AutreP">Autre</ion-option>
+		<ion-label>Cable</ion-label>
+			<ion-select [(ngModel)]="selectionSilo" (ionChange)="onSelectCableChange($event)">
+				<div *ngIf="selectionCable == 'Deshumidification'">
+					<ion-option value="1">#1</ion-option>
+					<ion-option value="2">#2</ion-option>
+					<ion-option value="3">#3</ion-option>
 				</div>
-				<div *ngIf="selectionEntrepot == 'StMrg'">
-					<ion-option value="Pompe">Section Pompe</ion-option>
-					<ion-option value="Village">Section Village</ion-option>
-					<ion-option value="AutreSTM">Autre</ion-option>
+				<div *ngIf="selectionSilo == 'Ventilation'">
+					<ion-option value="1">#1</ion-option>
+					<ion-option value="2">#2</ion-option>
+					<ion-option value="3">#3</ion-option>
 				</div>
 			</ion-select>	
   	</ion-item>

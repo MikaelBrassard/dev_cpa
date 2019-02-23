@@ -1,8 +1,8 @@
 export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyB8cYMxRnseuDb6Vxq06wAro31CgAXs4Xw",
-    authDomain: "dev-cpa.firebaseapp.com",
-    databaseURL: "https://dev-cpa.firebaseio.com",
-    projectId: "dev-cpa",
-    storageBucket: "dev-cpa.appspot.com",
-    messagingSenderId: "349572713132"
+    apiKey: "AIzaSyB1JbHOE5QBr9uAv6WwHQl7CNuzGZ9JUFA",
+    authDomain: "ferme-experimentale-alma.firebaseapp.com",
+    databaseURL: "https://ferme-experimentale-alma.firebaseio.com",
+    projectId: "ferme-experimentale-alma",
+    storageBucket: "ferme-experimentale-alma.appspot.com",
+    messagingSenderId: "744996981598"
 };

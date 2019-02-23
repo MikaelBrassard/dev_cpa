@@ -170,27 +170,27 @@ webpackEmptyAsyncContext.id = 188;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"../pages/alert/alert.module": [
+	"../pages/description-capteur/description-capteur.module": [
 		511,
 		8
 	],
-	"../pages/description-capteur/description-capteur.module": [
+	"../pages/humidite/fans.module": [
 		512,
 		7
 	],
-	"../pages/fans/fans.module": [
+	"../pages/login/login.module": [
 		513,
 		6
 	],
-	"../pages/login/login.module": [
+	"../pages/password/password.module": [
 		514,
 		5
 	],
-	"../pages/password/password.module": [
+	"../pages/register/register.module": [
 		515,
 		4
 	],
-	"../pages/register/register.module": [
+	"../pages/setting/alert.module": [
 		519,
 		3
 	],
@@ -582,15 +582,15 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/alert/alert.module#AlertPageModule', name: 'AlertPage', segment: 'alert', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/description-capteur/description-capteur.module#DescriptionCapteurPageModule', name: 'DescriptionPage', segment: 'description-capteur', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/fans/fans.module#FansPageModule', name: 'FansPage', segment: 'fans', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/humidite/fans.module#FansPageModule', name: 'FansPage', segment: 'fans', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/password/password.module#PasswordModule', name: 'Password', segment: 'password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistiques/statistiques.module#StatistiquesPageModule', name: 'StatistiquesPage', segment: 'statistiques', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/temperature/temperature.module#TemperaturePageModule', name: 'TemperaturePage', segment: 'temperature', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/setting/alert.module#AlertPageModule', name: 'AlertPage', segment: 'alert', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_5_angularfire2__["a" /* AngularFireModule */].initializeApp(__WEBPACK_IMPORTED_MODULE_12__app_firebase_config__["a" /* FIREBASE_CONFIG */]),
@@ -729,12 +729,12 @@ var AuthRequestProvider = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FIREBASE_CONFIG; });
 var FIREBASE_CONFIG = {
-    apiKey: "AIzaSyB8cYMxRnseuDb6Vxq06wAro31CgAXs4Xw",
-    authDomain: "dev-cpa.firebaseapp.com",
-    databaseURL: "https://dev-cpa.firebaseio.com",
-    projectId: "dev-cpa",
-    storageBucket: "dev-cpa.appspot.com",
-    messagingSenderId: "349572713132"
+    apiKey: "AIzaSyB1JbHOE5QBr9uAv6WwHQl7CNuzGZ9JUFA",
+    authDomain: "ferme-experimentale-alma.firebaseapp.com",
+    databaseURL: "https://ferme-experimentale-alma.firebaseio.com",
+    projectId: "ferme-experimentale-alma",
+    storageBucket: "ferme-experimentale-alma.appspot.com",
+    messagingSenderId: "744996981598"
 };
 //# sourceMappingURL=app.firebase.config.js.map
 

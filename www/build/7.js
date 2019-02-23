@@ -5,10 +5,10 @@ webpackJsonp([7],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DescriptionCapteurPageModule", function() { return DescriptionCapteurPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FansPageModule", function() { return FansPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__description_capteur__ = __webpack_require__(663);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fans__ = __webpack_require__(663);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var DescriptionCapteurPageModule = /** @class */ (function () {
-    function DescriptionCapteurPageModule() {
+var FansPageModule = /** @class */ (function () {
+    function FansPageModule() {
     }
-    DescriptionCapteurPageModule = __decorate([
+    FansPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__description_capteur__["a" /* DescriptionPage */],
+                __WEBPACK_IMPORTED_MODULE_2__fans__["a" /* FansPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__description_capteur__["a" /* DescriptionPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__fans__["a" /* FansPage */]),
             ],
         })
-    ], DescriptionCapteurPageModule);
-    return DescriptionCapteurPageModule;
+    ], FansPageModule);
+    return FansPageModule;
 }());
 
-//# sourceMappingURL=description-capteur.module.js.map
+//# sourceMappingURL=fans.module.js.map
 
 /***/ }),
 
@@ -42,10 +42,11 @@ var DescriptionCapteurPageModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DescriptionPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FansPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_firebase_request_firebase_request__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toast_toast__ = __webpack_require__(298);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,46 +59,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DescriptionPage = /** @class */ (function () {
-    function DescriptionPage(navCtrl, navParams, afReq) {
+
+var FansPage = /** @class */ (function () {
+    function FansPage(navCtrl, firebaseRequest, toast) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afReq = afReq;
-        this.indexFromTabs = 0;
-        this.itemPage = "";
-        this.prevPage = "";
-        this.entrepotSelection = "";
-        this.sectionSelection = "";
-        this.description = '';
-        var data = navParams.get('idexParam');
-        if (data != null) {
-            this.indexFromTabs = navParams.get('idexParam');
-            this.itemPage = navParams.get('PageItem');
-            this.prevPage = navParams.get('PrevPage');
-            this.entrepotSelection = navParams.get('SelectionVille');
-            this.sectionSelection = navParams.get('SelectionSection');
-        }
+        this.firebaseRequest = firebaseRequest;
+        this.toast = toast;
+        this.Fans = firebaseRequest.get('Fans' + '/' + this.selectionEntrepot);
+        this.selectionSection = '';
+        this.selectionEntrepot = '';
     }
-    DescriptionPage.prototype.modifyDescriptionClick = function () {
-        var _this = this;
-        this.afReq.set(this.itemPage + '/' + this.entrepotSelection + '/' + this.sectionSelection + '/' + this.indexFromTabs + '/Description', this.description).then(function (_) { return _this.returnToTabsPage(); });
+    FansPage.prototype.onSelectEntrepotChange = function (selectionEntrepotChanged) {
+        this.selectionEntrepot = selectionEntrepotChanged;
+        console.log('Selected', selectionEntrepotChanged);
+        console.log(this.Fans);
     };
-    DescriptionPage.prototype.returnToTabsPage = function () {
-        this.navCtrl.setRoot(this.prevPage);
+    FansPage.prototype.onSelectSectionChange = function (selectionSectionChanged) {
+        this.selectionSection = selectionSectionChanged;
+        console.log('Selected', selectionSectionChanged);
+        this.Fans = this.firebaseRequest.get('Fans' + '/' + this.selectionEntrepot + '/' + this.selectionSection);
     };
-    DescriptionPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DescriptionCapteurPage');
+    FansPage.prototype.descriptionClicked = function (Index) {
+        return this.navCtrl.push('DescriptionPage', { 'PrevPage': 'FansPage', 'PageItem': 'Fans', 'idexParam': Index, 'SelectionVille': this.selectionEntrepot, 'SelectionSection': this.selectionSection });
     };
-    DescriptionPage = __decorate([
+    FansPage.prototype.onClickItemList = function (description, index) {
+        this.toast.show('Fan ' + index + ' : ' + description);
+    };
+    FansPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad FansPage');
+    };
+    FansPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-description-capteur',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/description-capteur/description-capteur.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Description</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div *ngIf="indexFromTabs">\n		Entrer l\'information que vous voulez modifier de l\'item selectioner : {{indexFromTabs}}\n			<input type="text" [(ngModel)]="description" clear block>\n			<ion-buttons>\n				<button ion-button block outline color="primary" class="update-button" \n        type="submit" (click)="modifyDescriptionClick(description, indexFromTabs)">\n					modifier\n				</button>\n			</ion-buttons>\n	</div>\n	<div *ngIf="!indexFromTabs">\n		<p>\n				Vous navez selectionne aucun capteur a modifier... retour vers: \n		</p>\n		<div>\n			<button ion-button clear block color="primitive" (click)="returnToTabsPage()">ecran principale</button>\n		</div>\n	</div>\n</ion-content>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/description-capteur/description-capteur.html"*/,
+            selector: 'page-fans',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/humidite/fans.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n		<ion-title>Systeme de ventilation</ion-title>\n	</ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<ion-item>\n		<ion-label>Entrepot</ion-label>\n		<ion-select [(ngModel)]="selectionEntrepot" (ionChange)="onSelectEntrepotChange($event)">\n		  <ion-option value="Peribonka">Peribonka</ion-option>\n		  <ion-option value="StMrg">St-Margerite</ion-option>\n		</ion-select>\n	</ion-item>\n	<ion-item>	\n		<ion-label>Section</ion-label>\n			<ion-select [(ngModel)]="selectionSection" (ionChange)="onSelectSectionChange($event)">\n				<div *ngIf="selectionEntrepot == \'Peribonka\'">\n					<ion-option value="ABCD">Section ABCD</ion-option>\n					<ion-option value="EFG">Section EFG</ion-option>\n					<ion-option value="AutreP">Autre</ion-option>\n				</div>\n				<div *ngIf="selectionEntrepot == \'StMrg\'">\n					<ion-option value="Pompe">Section Pompe</ion-option>\n					<ion-option value="Village">Section Village</ion-option>\n					<ion-option value="AutreSTM">Autre</ion-option>\n				</div>\n			</ion-select>	\n  	</ion-item>\n\n	<ion-list>\n			<ion-item-sliding *ngFor="let fan of Fans | async; let i = index;">\n				<ion-item>\n					<img src="../../assets/imgs/fan.png" alt="fan" class="fan">\n					<button ion-button clear padding-top (click)="onClickItemList(fan.Description, i+1)"> fan {{fan.DescriptionCourte}} : {{fan.Marche | json}}</button>\n				</ion-item>\n\n				<ion-item-options>\n					<button ion-button color="secondary" (click)="descriptionClicked(i+1)">\n						<ion-icon name="menu"></ion-icon>\n						Description\n					</button>\n				</ion-item-options>\n			</ion-item-sliding>\n\n	</ion-list>\n</ion-content>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/humidite/fans.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */]])
-    ], DescriptionPage);
-    return DescriptionPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_toast_toast__["a" /* ToastProvider */]])
+    ], FansPage);
+    return FansPage;
 }());
 
-//# sourceMappingURL=description-capteur.js.map
+//# sourceMappingURL=fans.js.map
 
 /***/ })
 

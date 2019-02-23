@@ -116,7 +116,7 @@ var TabsPage = /** @class */ (function () {
     };
     TabsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-tabs',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/tabs/tabs.html"*/'<ion-tabs color="primary">\n  <ion-tab [root] = "tab1root" tabTitle="Temperature" tabIcon="thermometer"></ion-tab>\n  <ion-tab [root] = "tab2root" tabTitle="Ventilation" tabIcon="sunny"></ion-tab>\n  <ion-tab [root] = "tab3root" tabTitle="Alarmes" tabIcon="alert"></ion-tab>\n</ion-tabs>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/tabs/tabs.html"*/,
+            selector: 'page-tabs',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/tabs/tabs.html"*/'<ion-tabs color="primary">\n  <ion-tab [root] = "tab1root" tabTitle="Temperature" tabIcon="thermometer"></ion-tab>\n  <ion-tab [root] = "tab2root" tabTitle="Humidite" tabIcon="rainy"></ion-tab>\n  <ion-tab [root] = "tab3root" tabTitle="Parametres" tabIcon="settings"></ion-tab>\n</ion-tabs>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/tabs/tabs.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
     ], TabsPage);

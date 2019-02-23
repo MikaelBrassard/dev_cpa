@@ -5,10 +5,10 @@ webpackJsonp([5],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PasswordModule", function() { return PasswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password__ = __webpack_require__(665);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var LoginPageModule = /** @class */ (function () {
-    function LoginPageModule() {
+var PasswordModule = /** @class */ (function () {
+    function PasswordModule() {
     }
-    LoginPageModule = __decorate([
+    PasswordModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
+                __WEBPACK_IMPORTED_MODULE_2__password__["a" /* Password */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__password__["a" /* Password */]),
             ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__password__["a" /* Password */]
+            ]
         })
-    ], LoginPageModule);
-    return LoginPageModule;
+    ], PasswordModule);
+    return PasswordModule;
 }());
 
-//# sourceMappingURL=login.module.js.map
+//# sourceMappingURL=password.module.js.map
 
 /***/ }),
 
@@ -42,7 +45,7 @@ var LoginPageModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Password; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
@@ -60,39 +63,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var LoginPage = /** @class */ (function () {
-    function LoginPage(navCtrl, loadingCtrl, formBuilder, auth) {
+var Password = /** @class */ (function () {
+    function Password(navCtrl, loadingCtrl, formBuilder, auth) {
         this.navCtrl = navCtrl;
         this.loadingCtrl = loadingCtrl;
         this.formBuilder = formBuilder;
         this.auth = auth;
         this.form = this.formBuilder.group({
-            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
         });
     }
-    LoginPage.prototype.signInWithEmail = function () {
+    Password.prototype.signInWithEmail = function () {
         var _this = this;
         var loading = this.loadingCtrl.create({
             content: "S'il vous plaît, attendez ..."
         });
         loading.present();
-        this.auth.signInWithEmailAndPassword(this.form.value.email, this.form.value.password)
-            .then(function () {
+        this.auth.sendPasswordResetEmail(this.form.value.email).then(function () {
             loading.dismiss();
-            _this.navCtrl.setRoot('TabsPage');
+            _this.hasError = false;
+            _this.emailSent = true;
         }, function (error) {
             loading.dismiss();
             switch (error.code) {
                 case 'auth/invalid-email':
                     _this.errorMessage = "S'il vous plaît entrer une adresse email valide.";
                     break;
-                case 'auth/wrong-password':
-                    _this.errorMessage = "Combinaison nom d'utilisateur / mot de passe incorrecte.";
-                    break;
                 case 'auth/user-not-found':
-                    _this.errorMessage = "Combinaison nom d'utilisateur / mot de passe incorrecte.";
+                    _this.errorMessage = "Aucun utilisateur avec cet email n'a été trouvé.";
                     break;
                 default:
                     _this.errorMessage = error;
@@ -101,31 +99,22 @@ var LoginPage = /** @class */ (function () {
             _this.hasError = true;
         });
     };
-    LoginPage.prototype.signInWithFacebook = function () {
-        var _this = this;
-        this.auth.signInWithFacebook()
-            .then(function () {
-            _this.navCtrl.setRoot('TabsPage');
-        }, function (error) {
-            console.log(error);
-        });
+    Password.prototype.navigatePop = function () {
+        this.navCtrl.pop();
     };
-    LoginPage.prototype.navigateTo = function (page) {
-        this.navCtrl.push(page);
-    };
-    LoginPage = __decorate([
+    Password = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/login/login.html"*/'<ion-content padding>\n  <div class="title">Connexion</div>\n  <div padding>\n    <form [formGroup]="form" (ngSubmit)="signInWithEmail()">\n      <ion-item>\n        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-input type="password" placeholder="Mot de passe" formControlName="password"></ion-input>\n      </ion-item>\n      <button ion-button block outline color="primary" class="signin-button" \n        type="submit" [disabled]="!form.valid">\n        Se connecter\n      </button>\n    </form>\n    <p class="forgot-password" (click)="navigateTo(\'Password\')">Mot de passe oublié?</p>\n    <p ion-text color="danger" *ngIf="hasError">{{errorMessage}}</p>\n  </div>\n  <div class="strike">\n    <span>OU</span>\n  </div>\n  <button ion-button block clear (click)="signInWithFacebook()" color="light" class="facebook-button">\n    <ion-icon name="logo-facebook"></ion-icon> Connectez-vous avec Facebook\n  </button>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar class="footer">\n    <div (click)="navigateTo(\'RegisterPage\')">\n      <span>Vous n\'avez pas de compte?<strong></strong></span>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/login/login.html"*/,
+            selector: 'page-password',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/password/password.html"*/'<ion-content padding>\n  <ion-header no-border>\n    <ion-navbar transparent>\n    </ion-navbar>\n  </ion-header>\n  <ion-icon name="lock" class="lock-icon"></ion-icon>\n  <div padding>\n    <form [formGroup]="form" (ngSubmit)="signInWithEmail()" *ngIf="!emailSent">\n      <ion-item>\n        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>\n      </ion-item>\n      <button ion-button block outline color="primary" class="password-recover-button" \n        type="submit" [disabled]="!form.valid">\n        Envoyer un email\n      </button>\n    </form>\n    <p ion-text class="email-soon" *ngIf="emailSent">Vous allez bientôt recevoir un email pour réinitialiser votre nouveau mot de passe.</p>\n    <p ion-text color="danger" *ngIf="hasError">{{errorMessage}}</p>\n  </div>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar class="footer">\n    <div (click)="navigatePop()">\n      <span>Vous avez déjà un compte? <strong>Se connecter</strong>.</span>\n    </div>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/password/password.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]])
-    ], LoginPage);
-    return LoginPage;
+    ], Password);
+    return Password;
 }());
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=password.js.map
 
 /***/ })
 

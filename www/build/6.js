@@ -5,10 +5,10 @@ webpackJsonp([6],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FansPageModule", function() { return FansPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fans__ = __webpack_require__(664);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(664);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var FansPageModule = /** @class */ (function () {
-    function FansPageModule() {
+var LoginPageModule = /** @class */ (function () {
+    function LoginPageModule() {
     }
-    FansPageModule = __decorate([
+    LoginPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__fans__["a" /* FansPage */],
+                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__fans__["a" /* FansPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
             ],
         })
-    ], FansPageModule);
-    return FansPageModule;
+    ], LoginPageModule);
+    return LoginPageModule;
 }());
 
-//# sourceMappingURL=fans.module.js.map
+//# sourceMappingURL=login.module.js.map
 
 /***/ }),
 
@@ -42,11 +42,11 @@ var FansPageModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FansPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_firebase_request_firebase_request__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toast_toast__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(154);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,44 +60,72 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var FansPage = /** @class */ (function () {
-    function FansPage(navCtrl, firebaseRequest, toast) {
+
+var LoginPage = /** @class */ (function () {
+    function LoginPage(navCtrl, loadingCtrl, formBuilder, auth) {
         this.navCtrl = navCtrl;
-        this.firebaseRequest = firebaseRequest;
-        this.toast = toast;
-        this.Fans = firebaseRequest.get('Fans' + '/' + this.selectionEntrepot);
-        this.selectionSection = '';
-        this.selectionEntrepot = '';
+        this.loadingCtrl = loadingCtrl;
+        this.formBuilder = formBuilder;
+        this.auth = auth;
+        this.form = this.formBuilder.group({
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
+        });
     }
-    FansPage.prototype.onSelectEntrepotChange = function (selectionEntrepotChanged) {
-        this.selectionEntrepot = selectionEntrepotChanged;
-        console.log('Selected', selectionEntrepotChanged);
-        console.log(this.Fans);
+    LoginPage.prototype.signInWithEmail = function () {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: "S'il vous plaît, attendez ..."
+        });
+        loading.present();
+        this.auth.signInWithEmailAndPassword(this.form.value.email, this.form.value.password)
+            .then(function () {
+            loading.dismiss();
+            _this.navCtrl.setRoot('TabsPage');
+        }, function (error) {
+            loading.dismiss();
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    _this.errorMessage = "S'il vous plaît entrer une adresse email valide.";
+                    break;
+                case 'auth/wrong-password':
+                    _this.errorMessage = "Combinaison nom d'utilisateur / mot de passe incorrecte.";
+                    break;
+                case 'auth/user-not-found':
+                    _this.errorMessage = "Combinaison nom d'utilisateur / mot de passe incorrecte.";
+                    break;
+                default:
+                    _this.errorMessage = error;
+                    break;
+            }
+            _this.hasError = true;
+        });
     };
-    FansPage.prototype.onSelectSectionChange = function (selectionSectionChanged) {
-        this.selectionSection = selectionSectionChanged;
-        console.log('Selected', selectionSectionChanged);
-        this.Fans = this.firebaseRequest.get('Fans' + '/' + this.selectionEntrepot + '/' + this.selectionSection);
+    LoginPage.prototype.signInWithFacebook = function () {
+        var _this = this;
+        this.auth.signInWithFacebook()
+            .then(function () {
+            _this.navCtrl.setRoot('TabsPage');
+        }, function (error) {
+            console.log(error);
+        });
     };
-    FansPage.prototype.descriptionClicked = function (Index) {
-        return this.navCtrl.push('DescriptionPage', { 'PrevPage': 'FansPage', 'PageItem': 'Fans', 'idexParam': Index, 'SelectionVille': this.selectionEntrepot, 'SelectionSection': this.selectionSection });
+    LoginPage.prototype.navigateTo = function (page) {
+        this.navCtrl.push(page);
     };
-    FansPage.prototype.onClickItemList = function (description, index) {
-        this.toast.show('Fan ' + index + ' : ' + description);
-    };
-    FansPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad FansPage');
-    };
-    FansPage = __decorate([
+    LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-fans',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/fans/fans.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n		<ion-title>Systeme de ventilation</ion-title>\n	</ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<ion-item>\n		<ion-label>Entrepot</ion-label>\n		<ion-select [(ngModel)]="selectionEntrepot" (ionChange)="onSelectEntrepotChange($event)">\n		  <ion-option value="Peribonka">Peribonka</ion-option>\n		  <ion-option value="StMrg">St-Margerite</ion-option>\n		</ion-select>\n	</ion-item>\n	<ion-item>	\n		<ion-label>Section</ion-label>\n			<ion-select [(ngModel)]="selectionSection" (ionChange)="onSelectSectionChange($event)">\n				<div *ngIf="selectionEntrepot == \'Peribonka\'">\n					<ion-option value="ABCD">Section ABCD</ion-option>\n					<ion-option value="EFG">Section EFG</ion-option>\n					<ion-option value="AutreP">Autre</ion-option>\n				</div>\n				<div *ngIf="selectionEntrepot == \'StMrg\'">\n					<ion-option value="Pompe">Section Pompe</ion-option>\n					<ion-option value="Village">Section Village</ion-option>\n					<ion-option value="AutreSTM">Autre</ion-option>\n				</div>\n			</ion-select>	\n  	</ion-item>\n\n	<ion-list>\n			<ion-item-sliding *ngFor="let fan of Fans | async; let i = index;">\n				<ion-item>\n					<img src="../../assets/imgs/fan.png" alt="fan" class="fan">\n					<button ion-button clear padding-top (click)="onClickItemList(fan.Description, i+1)"> fan {{fan.DescriptionCourte}} : {{fan.Marche | json}}</button>\n				</ion-item>\n\n				<ion-item-options>\n					<button ion-button color="secondary" (click)="descriptionClicked(i+1)">\n						<ion-icon name="menu"></ion-icon>\n						Description\n					</button>\n				</ion-item-options>\n			</ion-item-sliding>\n\n	</ion-list>\n</ion-content>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/fans/fans.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/mb/dev_cpa/src/pages/login/login.html"*/'<ion-content padding class="bg-image">\n  <div class="title">Connexion</div>\n  <div padding>\n    <form [formGroup]="form" (ngSubmit)="signInWithEmail()">\n      <ion-item>\n        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-input type="password" placeholder="Mot de passe" formControlName="password"></ion-input>\n      </ion-item>\n      <button ion-button block outline color="primary" class="signin-button" \n        type="submit" [disabled]="!form.valid">\n        Se connecter\n      </button>\n    </form>\n    <p class="forgot-password" (click)="navigateTo(\'Password\')">Mot de passe oublié?</p>\n    <p ion-text color="danger" *ngIf="hasError">{{errorMessage}}</p>\n  </div>\n  <div class="strike">\n    <span>OU</span>\n  </div>\n  <button ion-button block clear (click)="signInWithFacebook()" color="light" class="facebook-button">\n    <ion-icon name="logo-facebook"></ion-icon> <span>Connectez-vous avec Facebook</span>\n  </button>\n\n\n  <ion-footer>\n    <ion-toolbar class="footer">\n      <div (click)="navigateTo(\'RegisterPage\')">\n        <span>Vous n\'avez pas de compte?</span>\n      </div>\n    </ion-toolbar>\n  </ion-footer>\n\n</ion-content>'/*ion-inline-end:"/home/mb/dev_cpa/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_firebase_request_firebase_request__["a" /* FirebaseRequestProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_toast_toast__["a" /* ToastProvider */]])
-    ], FansPage);
-    return FansPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */]])
+    ], LoginPage);
+    return LoginPage;
 }());
 
-//# sourceMappingURL=fans.js.map
+//# sourceMappingURL=login.js.map
 
 /***/ })
 

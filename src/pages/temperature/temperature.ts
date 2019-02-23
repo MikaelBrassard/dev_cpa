@@ -14,31 +14,31 @@ export class TemperaturePage {
   Capteurs: Observable<any[]>;
 
   testRadioOpen: boolean;
-  selectionSection: string;
-  selectionEntrepot: string;
+  selectionCable: string;
+  selectionSilo: string;
 
   constructor(public alerCtrl: AlertController, private navCtrl: NavController,private firebaseRequest : FirebaseRequestProvider, private toast: ToastProvider) {
-    this.selectionSection = '';
-    this.selectionEntrepot = '';
+    this.selectionCable = '';
+    this.selectionSilo = '';
     
   }
 
-  onSelectEntrepotChange(selectionEntrepotChanged: any) {
-    this.selectionEntrepot = selectionEntrepotChanged;
+  onSelectSiloChange(selectionEntrepotChanged: any) {
+    this.selectionSilo = selectionEntrepotChanged;
     console.log('Selected', selectionEntrepotChanged);
     console.log(this.Capteurs);
     
   }
 
-  onSelectSectionChange(selectionSectionChanged: any) {
-    this.selectionSection = selectionSectionChanged;
+  onSelectCableChange(selectionSectionChanged: any) {
+    this.selectionCable = selectionSectionChanged;
     console.log('Selected', selectionSectionChanged);
-    this.Capteurs = this.firebaseRequest.get('Capteurs'+'/'+this.selectionEntrepot+'/'+this.selectionSection)
+    this.Capteurs = this.firebaseRequest.get('Capteurs'+'/'+this.selectionSilo+'/'+this.selectionCable)
     
   }
 
   descriptionClicked(Index:number): Promise<any>{
-    return this.navCtrl.push('DescriptionPage', { 'PrevPage': 'TemperaturePage', 'PageItem': 'Capteurs','idexParam': Index, 'SelectionVille': this.selectionEntrepot, 'SelectionSection': this.selectionSection});
+    return this.navCtrl.push('DescriptionPage', { 'PrevPage': 'TemperaturePage', 'PageItem': 'Capteurs','idexParam': Index, 'SelectionVille': this.selectionSilo, 'SelectionSection': this.selectionCable});
   }
 
   onClickItemList(description:JSON, index:Number){
